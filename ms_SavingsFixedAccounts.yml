@@ -4,3 +4,33 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8082/eureka/
+      
+      resilience4j.circuitbreaker:
+    instances:
+        creditCardsCB:
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: TIME_BASED
+            minimumNumberOfCalls: 20
+            waitDurationInOpenState: 50s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+            
+        numberAccountsCB:
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: TIME_BASED
+            minimumNumberOfCalls: 20
+            waitDurationInOpenState: 50s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+        
+resilience4j.timelimiter:
+    instances:
+        creditCardsCB:
+            timeoutDuration: 2s
+            cancelRunningFuture: true
+            
+        numberAccountsCB:
+            timeoutDuration: 2s
+            cancelRunningFuture: true
