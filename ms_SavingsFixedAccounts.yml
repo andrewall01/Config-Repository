@@ -6,17 +6,8 @@ eureka:
       defaultZone: http://localhost:8082/eureka/
       
       resilience4j.circuitbreaker:
-    instances:
-        creditCardsCB:
-            slidingWindowSize: 10
-            permittedNumberOfCallsInHalfOpenState: 3
-            slidingWindowType: TIME_BASED
-            minimumNumberOfCalls: 20
-            waitDurationInOpenState: 50s
-            failureRateThreshold: 50
-            eventConsumerBufferSize: 10
-            
-        numberAccountsCB:
+    instances:    
+        AccountsCB:
             slidingWindowSize: 10
             permittedNumberOfCallsInHalfOpenState: 3
             slidingWindowType: TIME_BASED
@@ -26,11 +17,8 @@ eureka:
             eventConsumerBufferSize: 10
         
 resilience4j.timelimiter:
-    instances:
-        creditCardsCB:
-            timeoutDuration: 2s
-            cancelRunningFuture: true
+    instances:      
             
-        numberAccountsCB:
+        AccountsCB:
             timeoutDuration: 2s
             cancelRunningFuture: true
